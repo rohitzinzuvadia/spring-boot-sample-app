@@ -1,6 +1,6 @@
 
 def ECR_REPO
-pipeline{
+pipeline {
     agent any
     environment{
         dockerHome = tool 'myDocker'
@@ -41,7 +41,8 @@ pipeline{
                         sh 'docker push ${ECR_REPO.ecr_repository_name.value}:dev'
                     }
                 }
-        }
+            }
+        }    
         stage("Deploy ECS Task"){
             steps{
                 echo "========executing A========"
