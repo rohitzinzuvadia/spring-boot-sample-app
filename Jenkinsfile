@@ -15,10 +15,12 @@ pipeline{
         stage("Create ECR "){
             steps{
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-personal']]) {
-                    dir('deployment/terraform/ecr') {
-                         sh 'terraform init -backend-config=backend-dev-config.tfvars'
-                         sh 'terraform plan'
-                         sh 'terraform apply -auto-approve'
+                    script{
+                        dir('deployment/terraform/ecr') {
+                            sh 'terraform init -backend-config=backend-dev-config.tfvars'
+                            sh 'terraform plan'
+                            sh 'terraform apply -auto-approve'
+                        }
                     }
                 }
             }
