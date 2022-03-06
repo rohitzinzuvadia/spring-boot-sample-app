@@ -10,7 +10,7 @@ provider "aws" {
 resource "aws_ecr_repository" "spring-boot-sample-app-ecr" {
   name = "spring-boot-sample-app"
 }
-output "repository_url" {
+output "ecr_repository_name" {
     description = "ECR Repository url"
     value = aws_ecr_repository.spring-boot-sample-app-ecr.repository_url
 }

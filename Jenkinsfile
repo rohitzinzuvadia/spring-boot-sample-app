@@ -1,9 +1,12 @@
+
+def ECR_REPO
 pipeline{
     agent any
     environment{
         dockerHome = tool 'myDocker'
         mavenHome = tool 'myMaven'
-        PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+        terraformHome = tool 'myTerraform'
+        PATH = "$dockerHome/bin:$mavenHome/bin:$terraformHome/bin:$PATH"
     }
     stages{
         stage("Code Build"){
@@ -24,14 +27,20 @@ pipeline{
                             sh 'terraform plan'
                             sh 'terraform apply -auto-approve'
                         }
+                        ECR_REPO = readJSON file: 'deployment/terraform/ecr/output.json'
                     }
                 }
             }
         }
         stage("Build Image & Push "){
             steps{
-                echo "========executing A========"
-            }
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS-PERSONAL']]) {
+                    script{
+                        sh '$(aws ecr get-login --no-include-email --region ap-south-1)'
+                        sh 'docker build -t ${ECR_REPO.ecr_repository_name.value}:dev -f deployment/Docker/Dockerfile .'
+                        sh 'docker push ${ECR_REPO.ecr_repository_name.value}:dev'
+                    }
+                }
         }
         stage("Deploy ECS Task"){
             steps{
