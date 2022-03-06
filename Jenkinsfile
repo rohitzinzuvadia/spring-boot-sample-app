@@ -13,6 +13,9 @@ pipeline{
             }
         }
         stage("Create ECR "){
+            options {
+                skipDefaultCheckout()
+            }
             steps{
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-personal']]) {
                     script{
