@@ -17,7 +17,7 @@ pipeline{
                 skipDefaultCheckout()
             }
             steps{
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-personal']]) {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS-PERSONAL']]) {
                     script{
                         dir('deployment/terraform/ecr') {
                             sh 'terraform init -backend-config=backend-dev-config.tfvars'
