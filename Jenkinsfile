@@ -5,8 +5,7 @@ pipeline {
     environment{
         dockerHome = tool 'myDocker'
         mavenHome = tool 'myMaven'
-        terraformHome = tool 'myTerraform'
-        PATH = "$dockerHome/bin:$mavenHome/bin:$terraformHome/usr/bin:$PATH"
+        PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
     }
     stages{
         stage("Code Build"){
