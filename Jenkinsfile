@@ -5,12 +5,19 @@ pipeline{
     stages{
         stage("Code Build"){
             steps{
-                echo "========executing A========"
+                git branch: 'develop', url: 'https://github.com/rohitzinzuvadia/spring-boot-sample-app'
+                sh 'mvn clean package -DskipTests=True'
             }
         }
         stage("Create ECR "){
             steps{
-                echo "========executing A========"
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-personal']]) {
+                    dir('deployment/terraform/ecr') {
+                         sh 'terraform init -backend-config=backend-dev-config.tfvars'
+                         sh 'terraform plan'
+                         sh 'terraform apply -auto-approve'
+                    }
+                }
             }
         }
         stage("Build Image & Push "){
