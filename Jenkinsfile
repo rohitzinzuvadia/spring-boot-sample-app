@@ -51,6 +51,7 @@ pipeline {
                         dir('deployment/terraform/ecs') {
                             sh 'terraform init -backend-config=backend-dev-config.tfvars'
                             sh 'terraform plan'
+                            sh 'terraform validate'
                             sh 'terraform apply -auto-approve'
                             //sh 'terraform destroy -target aws_ecr_repository.spring-boot-sample-app'
                         }
