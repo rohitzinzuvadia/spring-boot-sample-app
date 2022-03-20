@@ -27,7 +27,7 @@ resource "aws_ecs_task_definition" "sample-ecs-task" {
             ],
             "command": [
                 "/app/bin/runApp",
-                "${var.environment}"
+                "${var.env}"
             ],
             "privileged": false,
             "portMappings": [
