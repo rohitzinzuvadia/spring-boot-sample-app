@@ -27,7 +27,6 @@ pipeline {
                             sh 'terraform apply -auto-approve'
                             //sh 'terraform destroy -target aws_ecr_repository.spring-boot-sample-app'
                         }
-                        ECR_REPO = readJSON file: 'deployment/terraform/ecr/output.json'
                     }
                 }
             }
@@ -36,11 +35,11 @@ pipeline {
             steps{
                 echo "Build Image & Push"
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS-PERSONAL']]) {
-                    /*script{
+                    script{
                         sh '$(aws ecr get-login --no-include-email --region ap-south-1)'
-                        sh 'docker build -t ${ECR_REPO.ecr_repository_name.value}:dev -f deployment/Docker/Dockerfile .'
-                        sh 'docker push ${ECR_REPO.ecr_repository_name.value}:dev'
-                    }*/
+                        sh 'docker build -t 635489002009.dkr.ecr.ap-south-1.amazonaws.com/spring-boot-sample-app:dev -f deployment/Docker/Dockerfile .'
+                        sh 'docker push 635489002009.dkr.ecr.ap-south-1.amazonaws.com/spring-boot-sample-app:dev'
+                    }
                 }
             }
         }    

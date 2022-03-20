@@ -1,9 +1,9 @@
 resource "aws_ecs_task_definition" "sample-ecs-task" {
-    family = ""
+    family = "${var.serviceName}"
     container_definitions = [
         {
-            "name":"containername"
-            "image":"ecr image"
+            "name":"sample-ecs-task-001"
+            "image":"${var.ecrPath}:${var.env}"
             "cpu":10
             "memory":512
             "essential": true,
