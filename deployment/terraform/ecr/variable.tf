@@ -3,5 +3,4 @@ variable "serviceName" {
 }
 variable "regionName" {
     default =  "ap-south-1"
-  
 }
