@@ -25,7 +25,7 @@ pipeline {
                             sh 'terraform init -backend-config=backend-dev-config.tfvars'
                             sh 'terraform plan'
                             //sh 'terraform apply -auto-approve'
-                            sh 'terraform destroy -backend-config=backend-dev-config.tfvars -auto-approve'
+                            sh 'terraform destroy --auto-approve'
                         }
                         //ECR_REPO = readJSON file: 'deployment/terraform/ecr/output.json'
                     }
