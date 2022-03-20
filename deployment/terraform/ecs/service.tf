@@ -1,3 +1,11 @@
+terraform {
+  backend "s3" {
+  }
+}
+provider "aws" {
+  region = "${var.regionName}"
+}
+
 resource "aws_ecs_task_definition" "sample-ecs-task" {
     family = "${var.serviceName}"
     requires_compatibilities = ["FARGATE","EC2"]
