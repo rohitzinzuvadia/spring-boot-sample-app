@@ -3,7 +3,7 @@ terraform {
   }
 }
 provider "aws" {
-  region = "${var.regionName}"
+  region = "${var.region}"
 }
 
 resource "aws_ecs_task_definition" "sample-ecs-task" {
