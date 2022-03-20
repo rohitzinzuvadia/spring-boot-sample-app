@@ -1,8 +1,5 @@
 terraform {
   backend "s3" {
-    bucket = "dev.rdz3138.test"
-    key    = "terraform-test/ecr"
-    region = "${var.regionName}"
   }
 }
 provider "aws" {
