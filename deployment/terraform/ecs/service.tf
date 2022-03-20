@@ -12,7 +12,7 @@ resource "aws_ecs_task_definition" "sample-ecs-task" {
     network_mode = "awsvpc"
     task_role_arn = "arn:aws:iam::635489002009:role/Sample-App-Role"
     execution_role_arn =  "arn:aws:iam::635489002009:role/Sample-App-Role"
-    cpu=10
+    cpu=256
     memory=512
     container_definitions = <<EOF
     [
