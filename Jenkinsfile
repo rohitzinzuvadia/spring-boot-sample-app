@@ -55,6 +55,7 @@ pipeline {
                             //sh 'terraform destroy -target aws_ecr_repository.spring-boot-sample-app'
                         }
                     }
+                }    
             }
         }
     }
