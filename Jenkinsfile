@@ -27,7 +27,7 @@ pipeline {
                             //sh 'terraform apply -auto-approve'
                             sh 'terraform destroy -auto-approve'
                         }
-                        ECR_REPO = readJSON file: 'deployment/terraform/ecr/output.json'
+                        //ECR_REPO = readJSON file: 'deployment/terraform/ecr/output.json'
                     }
                 }
             }
