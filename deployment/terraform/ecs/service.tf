@@ -17,18 +17,27 @@ resource "aws_ecs_task_definition" "sample-ecs-task" {
     container_definitions = <<EOF
     [
         {
-            "name":"sample-ecs-task-001"
-            "image":"${var.ecrPath}:${var.env}"
-            "cpu":10
-            "memory":512
+            "name":"sample-ecs-task-001",
+            "image":"${var.ecrPath}:${var.env}",
+            "cpu":10,
+            "memory":512,
             "essential": true,
+            "entryPoint": [
+                "/bin/bash"
+            ],
+            "command": [
+                "/app/bin/runApp",
+                "${var.environment}"
+            ],
+            "privileged": false,
             "portMappings": [
                 {
                     "containerPort": 80,
                     "hostPort": 80
                     "protocol": "tcp"
                 }
-            ]
+            ],
+            "essential": true,
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
