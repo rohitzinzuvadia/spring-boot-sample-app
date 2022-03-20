@@ -25,27 +25,28 @@ pipeline {
                             sh 'terraform init -backend-config=backend-dev-config.tfvars'
                             sh 'terraform plan'
                             //sh 'terraform apply -auto-approve'
-                            sh 'terraform destroy'
+                            sh 'terraform destroy -auto-approve'
                         }
                         ECR_REPO = readJSON file: 'deployment/terraform/ecr/output.json'
                     }
                 }
             }
         }
-        stage("Build Image & Push "){
+        stage("Build Image & Push"){
             steps{
+                echo "Build Image & Push"
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS-PERSONAL']]) {
-                    script{
+                    /*script{
                         sh '$(aws ecr get-login --no-include-email --region ap-south-1)'
                         sh 'docker build -t ${ECR_REPO.ecr_repository_name.value}:dev -f deployment/Docker/Dockerfile .'
                         sh 'docker push ${ECR_REPO.ecr_repository_name.value}:dev'
-                    }
+                    }*/
                 }
             }
         }    
         stage("Deploy ECS Task"){
             steps{
-                echo "========executing A========"
+                echo "Deploy ECS Task"
             }
         }
     }
