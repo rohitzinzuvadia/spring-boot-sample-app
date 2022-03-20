@@ -24,7 +24,8 @@ pipeline {
                         dir('deployment/terraform/ecr') {
                             sh 'terraform init -backend-config=backend-dev-config.tfvars'
                             sh 'terraform plan'
-                            sh 'terraform apply -auto-approve'
+                            //sh 'terraform apply -auto-approve'
+                            sh 'terraform destroy'
                         }
                         ECR_REPO = readJSON file: 'deployment/terraform/ecr/output.json'
                     }
