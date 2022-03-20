@@ -25,7 +25,7 @@ pipeline {
                             sh 'terraform init -backend-config=backend-dev-config.tfvars'
                             //sh 'terraform plan'
                             //sh 'terraform apply -auto-approve'
-                            sh 'terraform destroy --auto-approve'
+                            sh 'terraform destroy -target aws_ecr_repository.spring-boot-sample-app'
                         }
                         //ECR_REPO = readJSON file: 'deployment/terraform/ecr/output.json'
                     }
