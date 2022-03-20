@@ -2,15 +2,15 @@ terraform {
   backend "s3" {
     bucket = "dev.rdz3138.test"
     key    = "terraform-test/ecr"
-    region = "ap-south-1"
+    region = "${var.regionName}"
   }
 }
 provider "aws" {
-  region = "ap-south-1"
+  region = "${var.regionName}"
 }
 
 resource "aws_ecr_repository" "spring-boot-sample-app-ecr" {
-  name = "spring-boot-sample-app"
+  name = "${var.serviceName}"
 }
 output "ecr_repository_name" {
     description = "ECR Repository url"
