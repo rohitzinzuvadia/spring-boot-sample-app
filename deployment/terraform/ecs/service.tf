@@ -6,7 +6,7 @@ provider "aws" {
   region = "${var.region}"
 }
 resource "aws_cloudwatch_log_group" "sample-ecs-task-log" {
-  name = "clg-dev-sample-ecs-task"
+  name = "clg-${var.env}-${var.serviceName}"
   retention_in_days =  14  
 
   tags = {
@@ -50,7 +50,7 @@ resource "aws_ecs_task_definition" "sample-ecs-task" {
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": aws_cloudwatch_log_group.sample-ecs-task-log.name,
+                    "awslogs-group": "clg-${var.env}-${var.serviceName}",
                     "awslogs-region": "${var.region}",
 		            "awslogs-stream-prefix":"${var.serviceName}-${var.env}"
                 }
