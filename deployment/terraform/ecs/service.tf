@@ -7,7 +7,7 @@ provider "aws" {
 }
 resource "aws_cloudwatch_log_group" "sample-ecs-task-log" {
   name = "clg-dev-sample-ecs-task"
-  retentionretention_in_days =  14  
+  retention_in_days =  14  
 
   tags = {
     Environment = "dev"
