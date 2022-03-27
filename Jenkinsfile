@@ -37,8 +37,8 @@ pipeline {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS-PERSONAL']]) {
                     script{
                         sh '$(aws ecr get-login --no-include-email --region ap-south-1)'
-                        sh 'docker build -t 635489002009.dkr.ecr.ap-south-1.amazonaws.com/spring-boot-sample-app:dev -f deployment/Docker/Dockerfile .'
-                        sh 'docker push 635489002009.dkr.ecr.ap-south-1.amazonaws.com/spring-boot-sample-app:dev'
+                        sh 'docker build -t ${account_name}/spring-boot-sample-app:dev -f deployment/Docker/Dockerfile .'
+                        sh 'docker push ${account_name}/spring-boot-sample-app:dev'
                     }
                 }
             }
