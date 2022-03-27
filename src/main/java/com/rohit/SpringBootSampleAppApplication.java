@@ -17,7 +17,7 @@ public class SpringBootSampleAppApplication implements CommandLineRunner {
 	Environment environment;
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootSampleAppApplication.class, args);
+		SpringApplication.run(SpringBootSampleAppApplication.class, args).close();
 	}
 
 	@Override
