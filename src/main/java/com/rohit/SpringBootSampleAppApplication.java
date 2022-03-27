@@ -24,7 +24,7 @@ public class SpringBootSampleAppApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		String[] activeProfiles = environment.getActiveProfiles();
 		for(String profile : activeProfiles){
-			logger.info("Application is running using : {} profile",profile);
+			logger.info("SpringBootSampleAppApplication is up and running using : {} profile",profile);
 		}
 	}
 }
