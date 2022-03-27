@@ -5,6 +5,15 @@ terraform {
 provider "aws" {
   region = "${var.region}"
 }
+resource "aws_cloudwatch_log_group" "sample-ecs-task-log" {
+  name = "clg-dev-sample-ecs-task"
+  retentionretention_in_days =  14  
+
+  tags = {
+    Environment = "dev"
+    Application = "sample-ecs-task"
+  }
+}
 
 resource "aws_ecs_task_definition" "sample-ecs-task" {
     family = "${var.serviceName}"
@@ -41,7 +50,7 @@ resource "aws_ecs_task_definition" "sample-ecs-task" {
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "clg-${var.env}-${var.serviceName}",
+                    "awslogs-group": aws_cloudwatch_log_group.sample-ecs-task-log.name,
                     "awslogs-region": "${var.region}",
 		            "awslogs-stream-prefix":"${var.serviceName}-${var.env}"
                 }
