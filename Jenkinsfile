@@ -24,9 +24,7 @@ pipeline {
                         dir('deployment/terraform/ecr') {
                             sh 'terraform init -backend-config=backend-dev-config.tfvars'
                             sh 'terraform plan'
-                            //sh 'terraform apply -auto-approve'
-                            sh 'terraform destroy -auto-approve'
-                            //sh 'terraform destroy -target aws_ecr_repository.spring-boot-sample-app'
+                            sh 'terraform apply -auto-approve'
                         }
                     }
                 }
@@ -51,10 +49,10 @@ pipeline {
                     script{
                         dir('deployment/terraform/ecs') {
                             sh 'terraform init -backend-config=backend-dev-config.tfvars'
-                            sh 'terraform plan'
                             sh 'terraform validate'
-                            sh 'terraform apply -auto-approve'
-                            //sh 'terraform destroy -target aws_ecr_repository.spring-boot-sample-app'
+                            sh 'terraform plan'
+                            //sh 'terraform apply -auto-approve'
+                            sh 'terraform destroy -auto-approve'
                         }
                     }
                 }    
