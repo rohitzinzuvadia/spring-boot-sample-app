@@ -1,10 +1,3 @@
-terraform {
-  backend "s3" {
-  }
-}
-provider "aws" {
-  region = "${var.region}"
-}
 resource "aws_cloudwatch_log_group" "sample-ecs-task-log" {
   name = "clg-${var.env}-${var.serviceName}"
   retention_in_days =  14  
@@ -58,4 +51,20 @@ resource "aws_ecs_task_definition" "sample-ecs-task" {
         }
     ]
     EOF
+}
+resource "aws_ecs_service" "sample-ecs-service" {
+    name            = "${var.serviceName}-${var.env}"
+  cluster         = "${var.cluster}"
+  task_definition = "${aws_ecs_task_definition.sample-ecs-task.arn}"
+  desired_count   = "${var.desiredCount}"
+  deployment_maximum_percent=200
+  deployment_minimum_healthy_percent=0
+  launch_type = "FARGATE"
+  network_configuration {
+			subnets =["${var.subnet1}",
+			  "${var.subnet2}",
+			  "${var.subnet3}"]
+			assign_public_ip = true
+			security_groups = ["${var.securityGroup}"]
+		  }
 }

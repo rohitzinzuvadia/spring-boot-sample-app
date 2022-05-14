@@ -1,5 +1,6 @@
 package com.rohit;
 
+import com.rohit.service.MessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class SpringBootSampleAppApplication implements CommandLineRunner {
 	@Autowired
 	Environment environment;
 
+	@Autowired
+	MessageService messageService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootSampleAppApplication.class, args).close();
 	}
@@ -26,5 +30,6 @@ public class SpringBootSampleAppApplication implements CommandLineRunner {
 		for(String profile : activeProfiles){
 			logger.info("SpringBootSampleAppApplication is up and running using : {} profile",profile);
 		}
+		messageService.checkMessages();
 	}
 }
