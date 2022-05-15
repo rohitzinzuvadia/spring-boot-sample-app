@@ -1,9 +1,10 @@
 spring:
   profile: dev
-  autoconfigure:
-    exclude: org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration
+
 cloud:
   aws:
     region:
       auto: false
       static: ap-south-1
+    endpoint:
+      uri: https://sqs.ap-south-1.amazonaws.com/635489002009/dev-rohit-test-111
