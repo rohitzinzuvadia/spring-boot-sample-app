@@ -22,7 +22,7 @@ public class MessageService {
 
     @SqsListener(deletionPolicy = SqsMessageDeletionPolicy.ON_SUCCESS)
     public void checkMessages(){
-        Student student = queueMessagingTemplate.receiveAndConvert("dev.rohit.test.111", Student.class);
+        Student student = queueMessagingTemplate.receiveAndConvert("dev-rohit-test-111", Student.class);
         logger.info("Name : {} and Grade : {} ", student.getName(),student.getGrade());
     }
 
