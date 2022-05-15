@@ -1,2 +1,5 @@
 spring:
   profile: dev
+cloud:
+  aws:
+    region: AP_SOUTH_1
