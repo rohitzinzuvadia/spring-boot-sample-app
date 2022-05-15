@@ -4,4 +4,6 @@ spring:
     exclude: org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration
 cloud:
   aws:
-    region: AP_SOUTH_1
+    region:
+      auto: false
+      static: ap-south-1
