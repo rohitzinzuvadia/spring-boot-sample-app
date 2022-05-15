@@ -1,5 +1,7 @@
 spring:
   profile: dev
+  autoconfigure:
+    exclude: org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration
 cloud:
   aws:
     region: AP_SOUTH_1
